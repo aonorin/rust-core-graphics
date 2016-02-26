@@ -7,19 +7,15 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-#![crate_name = "core_graphics"]
-#![crate_type = "rlib"]
-
 extern crate libc;
 extern crate core_foundation;
+extern crate serde;
 
-#[cfg(target_os="macos")]
 pub mod base;
-#[cfg(target_os="macos")]
+pub mod color_space;
+pub mod context;
 pub mod data_provider;
-#[cfg(target_os="macos")]
-pub mod font;
-#[cfg(target_os="macos")]
-pub mod geometry;
-#[cfg(target_os="macos")]
 pub mod display;
+pub mod font;
+pub mod geometry;
+

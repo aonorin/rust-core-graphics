@@ -9,11 +9,31 @@
 
 // this file defines CGFloat, as well as stubbed data types.
 
+#![allow(non_camel_case_types)]
+
 use libc;
 
-// TODO: this is actually a libc::c_float on 32bit
+#[cfg(any(target_arch = "x86",
+          target_arch = "arm",
+          target_arch = "aarch64"))]
+pub type boolean_t = libc::c_int;
+#[cfg(target_arch = "x86_64")]
+pub type boolean_t = libc::c_uint;
+
+#[cfg(target_pointer_width = "64")]
 pub type CGFloat = libc::c_double;
+#[cfg(not(target_pointer_width = "64"))]
+pub type CGFloat = libc::c_float;
+
 pub type CGError = libc::int32_t;
 
 pub type CGAffineTransform = ();
+
+pub const kCGImageAlphaNone: u32 = 0;
+pub const kCGImageAlphaPremultipliedLast: u32 = 1;
+pub const kCGImageAlphaPremultipliedFirst: u32 = 2;
+pub const kCGImageAlphaLast: u32 = 3;
+pub const kCGImageAlphaFirst: u32 = 4;
+pub const kCGImageAlphaNoneSkipLast: u32 = 5;
+pub const kCGImageAlphaNoneSkipFirst: u32 = 6;
 
